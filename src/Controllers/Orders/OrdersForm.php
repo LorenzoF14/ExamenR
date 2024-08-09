@@ -148,7 +148,19 @@ class OrdersForm extends PublicController
                     $this->addError("Error al Actualizar la Orden");
                 }
                 break;
-                //
+            case "DEL":
+                $result = DaoOrder::delete(
+                    $this->order_id
+                );
+                if ($result > 0) {
+                    Site::redirectToWithMsg(
+                        "index.php?page=Orders_OrdersList",
+                        "Orden Eliminada"
+                    );
+                } else {
+                    $this->addError("Error al Eliminar la Orden");
+                }
+                break;
             default:
                 $this->addError("Modo Invalido");
                 break;

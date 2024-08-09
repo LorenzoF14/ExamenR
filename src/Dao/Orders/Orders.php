@@ -52,4 +52,10 @@ class Orders extends Table
             "OrderID" => $OrderID
         ]);
     }
+    //delete
+    public static function delete($id)
+    {
+        $deleteSql = "DELETE FROM Orders WHERE OrderID = :OrderID";
+        return self::executeNonQuery($deleteSql, ["OrderID" => $id]);
+    }
 }
