@@ -1,28 +1,28 @@
 <h2>{{modeDsc}}</h2>
-<form action="index.php?page=Orders_OrdersForm&mode={{mode}}&order_id={{order_id}}" method="post">
+<form action="index.php?page=Orders_OrdersForm&mode={{mode}}&OrderID={{OrderID}}" method="post">
     <div>
         <input type="hidden" name="mode" value="{{mode}}">
         <input type="hidden" name="cxfToken" value="{{cxfToken}}">
     </div>
     <div>
-        <label for="order_id">Orden ID</label>
-        <input type="text" name="order_id" id="order_id" value="{{order_id}}" readonly>
+        <label for="OrderID">Orden ID</label>
+        <input type="text" name="OrderID" id="OrderID" value="{{OrderID}}" readonly>
     </div>
     <div>
-        <label for="order_date">Fecha de Orden</label>
-        <input type="date" name="order_date" id="order_date" value="{{order_date}}" {{isReadOnly}}>
+        <label for="OrderDate">Fecha de Orden</label>
+        <input type="date" name="OrderDate" id="OrderDate" value="{{OrderDate}}" {{isReadOnly}}>
     </div>
     <div>
-        <label for="customer_id">ID de Cliente</label>
-        <input type="text" name="customer_id" id="customer_id" value="{{customer_id}}" {{isReadOnly}}>
+        <label for="CustomerID">ID de Cliente</label>
+        <input type="text" name="CustomerID" id="CustomerID" value="{{CustomerID}}" {{isReadOnly}}>
     </div>
     <div>
-        <label for="total_amount">Monto Total</label>
-        <input type="number" name="total_amount" id="total_amount" value="{{total_amount}}" {{isReadOnly}}>
+        <label for="TotalAmount">Monto Total</label>
+        <input type="number" name="TotalAmount" id="TotalAmount" value="{{TotalAmount}}" {{isReadOnly}}>
     </div>
     <div>
-        <label for="status">Estado</label>
-        <select name="status" id="status" {{isReadOnly}}>
+        <label for="Status">Estado</label>
+        <select name="Status" id="Status" {{isReadOnly}}>
             {{foreach statusOptions}}
                 <option value="{{key}}" {{selected}}>{{values}}</option>
                 {{endfor statusOptions}}

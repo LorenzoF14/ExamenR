@@ -35,4 +35,21 @@ class Orders extends Table
             "status" => $status
         ]);
     }
+    //actualizar
+    public static function update(
+        $OrderDate,
+        $CustomerID,
+        $TotalAmount,
+        $Status,
+        $OrderID
+    ) {
+        $updateSql = "UPDATE Orders SET OrderDate = :OrderDate, CustomerID = :CustomerID, TotalAmount = :TotalAmount, Status = :Status WHERE OrderID = :OrderID";
+        return self::executeNonQuery($updateSql, [
+            "OrderDate" => $OrderDate,
+            "CustomerID" => $CustomerID,
+            "TotalAmount" => $TotalAmount,
+            "Status" => $Status,
+            "OrderID" => $OrderID
+        ]);
+    }
 }

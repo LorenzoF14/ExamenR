@@ -55,14 +55,14 @@ class OrdersForm extends PublicController
                 $this->addError('Modo Invalido');
             }
         }
-        if (isset($_GET["order_id"])) {
-            $this->order_id = intval($_GET["order_id"]);
+        if (isset($_GET["OrderID"])) {
+            $this->order_id = intval($_GET["OrderID"]);
             $tmpOrderFromDb = DaoOrder::getById($this->order_id);
             if ($tmpOrderFromDb) {
-                $this->order_date = $tmpOrderFromDb['order_date'];
-                $this->customer_id = $tmpOrderFromDb['customer_id'];
-                $this->total_amount = $tmpOrderFromDb['total_amount'];
-                $this->status = $tmpOrderFromDb['status'];
+                $this->order_date = $tmpOrderFromDb['OrderDate'];
+                $this->customer_id = $tmpOrderFromDb['CustomerID'];
+                $this->total_amount = $tmpOrderFromDb['TotalAmount'];
+                $this->status = $tmpOrderFromDb['Status'];
             } else {
                 $this->addError("Orden No Encontrada");
             }
@@ -86,20 +86,20 @@ class OrdersForm extends PublicController
                 $this->addError("Modo Invalido");
             }
         }
-        if (isset($_POST["order_date"])) {
-            $this->order_date = $_POST['order_date'];
+        if (isset($_POST["OrderDate"])) {
+            $this->order_date = $_POST['OrderDate'];
             if (Validators::IsEmpty($this->order_date)) {
                 $this->addError('Fecha Invalida', "order_date_error");
             }
         }
-        if (isset($_POST["customer_id"])) {
-            $this->customer_id = $_POST['customer_id'];
+        if (isset($_POST["CustomerID"])) {
+            $this->customer_id = $_POST['CustomerID'];
             if (Validators::IsEmpty($this->customer_id)) {
                 $this->addError('Cliente Invalido', "customer_id_error");
             }
         }
-        if (isset($_POST["total_amount"])) {
-            $this->total_amount = $_POST['total_amount'];
+        if (isset($_POST["TotalAmount"])) {
+            $this->total_amount = $_POST['TotalAmount'];
             if (!is_numeric($this->total_amount) || $this->total_amount <= 0) {
                 $this->addError('Monto Total Invalido', "total_amount_error");
             }
@@ -131,7 +131,24 @@ class OrdersForm extends PublicController
                     $this->addError("Error al Crear la Orden");
                 }
                 break;
-                ///
+            case "UPD":
+                $result = DaoOrder::update(
+                    $this->order_date,
+                    $this->customer_id,
+                    $this->total_amount,
+                    $this->status,
+                    $this->order_id
+                );
+                if ($result > 0) {
+                    Site::redirectToWithMsg(
+                        "index.php?page=Orders_OrdersList",
+                        "Orden Actualizada"
+                    );
+                } else {
+                    $this->addError("Error al Actualizar la Orden");
+                }
+                break;
+                //
             default:
                 $this->addError("Modo Invalido");
                 break;
@@ -142,11 +159,11 @@ class OrdersForm extends PublicController
     {
         $this->viewData["modeDsc"] = sprintf($this->modeDscArr[$this->mode], $this->order_date);
         $this->viewData["mode"] = $this->mode;
-        $this->viewData["order_date"] = $this->order_date;
-        $this->viewData["customer_id"] = $this->customer_id;
-        $this->viewData["total_amount"] = $this->total_amount;
+        $this->viewData["OrderDate"] = $this->order_date;
+        $this->viewData["CustomerID"] = $this->customer_id;
+        $this->viewData["TotalAmount"] = $this->total_amount;
         $this->viewData["status"] = $this->status;
-        $this->viewData["order_id"] = $this->order_id;
+        $this->viewData["OrderID"] = $this->order_id;
         $this->viewData["error"] = $this->error;
         $this->viewData["has_errors"] = $this->has_errors;
 
