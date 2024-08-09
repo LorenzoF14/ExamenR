@@ -1,0 +1,7 @@
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY AUTO_INCREMENT,
+    OrderDate DATE NOT NULL,
+    CustomerID INT NOT NULL,
+    TotalAmount DECIMAL(18, 2) NOT NULL,
+    Status VARCHAR(50) NOT NULL
+);
